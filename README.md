@@ -8,13 +8,13 @@ https://www.worldsolarchallenge.org/api/positions （2019年10月20日現在）�
 ## 動作方法
 #### データベース情報の記入
 common_lib/User_lib.phpにデータベース情報を入力してください<br>
-  // データベース情報
-  $dataBaseType = 'mysql';
-  $dataBaseName = '';
-  $hostName = '';
-  $userName = '';
-  $password = '';
-  $portNumber = '';
+  // データベース情報<br>
+  $dataBaseType = 'mysql';<br>
+  $dataBaseName = '';<br>
+  $hostName = '';<br>
+  $userName = '';<br>
+  $password = '';<br>
+  $portNumber = '';<br>
 
 #### cronの実行
 FetchDBInsertPositionData.phpを5分おきにcronで自動実行させてください<br>
