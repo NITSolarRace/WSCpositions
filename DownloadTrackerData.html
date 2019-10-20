@@ -1,0 +1,67 @@
+ <!DOCTYPE HTML>
+ <html lang="ja">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="robots" content="noindex">
+   <meta name="author" content="IDE">
+   <meta name="description" content="">
+   <meta name="keywords" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="stylesheet" href="css/reset.css">
+   <link rel="stylesheet" href="css/common.css">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+   <link rel="stylesheet" href="css/jquery-ui.min.css">
+   <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
+   <title>TrackerData Download</title>
+ </head>
+ <body>
+   <div class="container">
+     <h1>WSC2019 トラッカーデータダウンロード</h1>
+     <p>全チームのトラッカーデータをcsvで取得</p>
+     <form class="form-inline ml-auto">
+       <input type="button" class="btn btn-sm ml-2 btn-outline-secondary" value="カレンダー" id="date">
+       <button type="button" class="btn btn-sm ml-2 btn-outline-secondary" id="export-csv">CSVログ出力</button>
+     </form>
+     <br>
+     <br>
+     <h3>■ 使い方</h3>
+     <p>「カレンダー」で日付を選択して、「CSVログ出力」をクリック</p>
+     <p>クリック後、ダウンロードのダイアログが開きます</p>
+     <br>
+     <h3>■ 仕組み</h3>
+     <p>5分間隔でサーバーが自動でWSCのwebサイトにデータを回収しに行っています</p>
+     <p>1日が終わったときにダウンロードするとよいです</p>
+     
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+   <script src="js/jquery-ui.min.js"></script>
+   <script src="js/datepicker-ja.js"></script>
+   <script>
+     $(document).ready(function(){
+        $('#date').datepicker();
+
+        // 「CSVログ出力」クリックイベント
+        $('#export-csv').on('click', function(){
+          var dateStr = '0';
+          // datepicker出力の日付文字列を「191020」等の6桁の数値に変換
+          var dateStr_tmp = $('#date').val();
+          var dateStrSplit = dateStr_tmp.split('/');
+          dateStrSplit[0] = dateStrSplit[0].slice(2);
+          dateStr = dateStrSplit.join('');
+
+          if(dateStr !== '0'){
+            // 日付をdateパラメータに乗せてリダイレクト
+            location.href = './ExportCSV.php?date=' + dateStr;
+          }
+          else{
+            alert('データの日付を選択してください');
+          }
+        });
+     });
+   </script>
+
+ </body>
+</html>
